@@ -16,6 +16,7 @@ function addBtns () {
     }}
 addBtns()
 
+test
 
 
 function add (a, b) {
