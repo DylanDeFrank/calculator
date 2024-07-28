@@ -1,5 +1,5 @@
 const divNumBtns = document.querySelector('div.numbers')
-const operators = ['+', '-', '*', '/', '=' ] 
+const operators = ['+', '-', '*', '/', '=', 'clear' ] 
 
 
 function addBtns () {
@@ -16,7 +16,7 @@ function addBtns () {
     }}
 addBtns()
 
-test
+
 
 
 function add (a, b) {
