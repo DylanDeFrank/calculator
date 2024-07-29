@@ -1,6 +1,6 @@
 const divNumBtns = document.querySelector('div.numbers')
 const operators = ['+', '-', '*', '/', '=', 'clear' ] 
-
+const divDisplay = document.querySelector('div.display')
 
 function addBtns () {
     for(i = 0; i <= 9; i++) {
@@ -16,7 +16,15 @@ function addBtns () {
     }}
 addBtns()
 
+const buttons = document.querySelectorAll('button')
 
+buttons.forEach ((button) => {
+    button.addEventListener('click', () => {
+        divDisplay.textContent = button.textContent
+       
+
+    })
+})
 
 
 function add (a, b) {
