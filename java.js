@@ -2,6 +2,20 @@ const divNumBtns = document.querySelector('div.numbers')
 const operators = ['+', '-', '*', '/', '=', 'clear' ] 
 const divDisplay = document.querySelector('div.display')
 
+let split = 0
+let displayNum = 0
+let firstNum = ''
+let operator = ''
+let secondNum = ''
+function operate () {
+    let a = Number(firstNum)
+    let b = Number(secondNum)
+
+    if (operator == '+') {
+        return add(a,b)
+    } 
+}
+
 
 function addBtns () {
     for(i = 0; i <= 9; i++) {
@@ -22,6 +36,13 @@ const buttons = document.querySelectorAll('button')
 
 buttons.forEach ((button) => {
     button.addEventListener('click', () => {
+        if (button.textContent == '=') {
+            displaySplit()
+            let result = operate()
+            divDisplay.textContent += button.textContent 
+            divDisplay.textContent += result
+            return
+        }
         let input = button.textContent
         divDisplay.textContent += input 
         displayNum = divDisplay.textContent
@@ -48,7 +69,7 @@ function displaySplit() {
        console.log(operator)
     }   
 
-    const equals = document.querySelector('#=')
+    const equals = document.querySelector('button#=')
     equals.textContent = YOO 
 function add (a, b) {
     return a + b
@@ -63,9 +84,4 @@ function divide (a, b) {
     return a / b
 }
 
-let split = 0
-let displayNum = 0
-let firstNum = ''
-let operator = ''
-let secondNum = ''
-function operate (num, op, num) {}
+
