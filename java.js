@@ -36,41 +36,14 @@ const buttons = document.querySelectorAll('button')
 
 buttons.forEach ((button) => {
     button.addEventListener('click', () => {
-        if (button.textContent == '=') {
-            displaySplit()
-            let result = operate()
-            divDisplay.textContent += button.textContent 
-            divDisplay.textContent += result
-            return
-        }
+     
         let input = button.textContent
         divDisplay.textContent += input 
-        displayNum = divDisplay.textContent
+        firstNum = divDisplay.textContent
       })
        })
-function displaySplit() {
-       let variableSplit = displayNum.split('')
-       for(let symbol of operators) {
-            for(let variable of variableSplit) {
-        if (variable == symbol ) {
-            split = variableSplit.indexOf(variable)
-            operator = variable
 
-        }}}
-       for(let variable of variableSplit) {
-        if (variableSplit.indexOf(variable) < split) {
-           firstNum += variable
-        } else if (variableSplit.indexOf(variable) > split) {
-            secondNum += variable
-        }
-       }
-       console.log(firstNum)
-       console.log(secondNum)
-       console.log(operator)
-    }   
 
-    const equals = document.querySelector('button#=')
-    equals.textContent = YOO 
 function add (a, b) {
     return a + b
 }
