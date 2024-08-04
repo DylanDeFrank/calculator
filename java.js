@@ -1,21 +1,60 @@
 const divNumBtns = document.querySelector('div.numbers')
-const operators = ['+', '-', '*', '/', '=', 'clear' ] 
+const operators = ['+', '-', '*', '/'] 
 const divDisplay = document.querySelector('div.display')
+const btns = ['=', 'clear']
 
 let split = 0
 let displayNum = 0
 let firstNum = ''
 let operator = ''
 let secondNum = ''
-function operate () {
-    let a = Number(firstNum)
-    let b = Number(secondNum)
+let symbolCheck = ''
 
-    if (operator == '+') {
-        return add(a,b)
-    } 
+function display (a, b, c) {
+    a = firstNum 
+    b = operator
+    c = secondNum
+
+    divDisplay.textContent = a + b + c 
+    return a+b+c
 }
 
+function operate (a, b, c) {
+    a = Number(firstNum )
+    b = operator
+    c = Number(secondNum)
+    if (b == '+') {
+        let result = add(a,c)
+        divDisplay.textContent = result
+        return result 
+    }
+    else if (b == '-') {
+        let result = subtract(a,c)
+        divDisplay.textContent = result 
+        return result
+    }
+    else if (b == '/') {
+        let result = divide(a,c)
+        divDisplay.textContent = result 
+        return result 
+    }
+    else if (b == '*') {
+        let result = multiply(a,c) 
+        divDisplay.textContent = result
+        return result
+    }
+
+}
+
+function cycleOp (symbol) {
+    for (let operator of operators) {
+        for(let sign of symbol){
+        if (sign == operator) {
+            return true 
+        }}
+    } 
+    return false
+}
 
 function addBtns () {
     for(i = 0; i <= 9; i++) {
@@ -24,12 +63,19 @@ function addBtns () {
         divNumBtns.appendChild(btn)
 
     }
-    for(let operator of operators) {
+    for(let op of operators) {
         const btn = document.createElement('button')
-        btn.textContent = operator
-        btn.id = operator
+        btn.textContent = op
+        btn.id = op
         divNumBtns.appendChild(btn)
-    }}
+    }
+
+    for (let but of btns) {
+        const btn = document.createElement('button') 
+        btn.textContent = but
+        divNumBtns.appendChild(btn)
+    }
+    }
 addBtns()
 
 const buttons = document.querySelectorAll('button')
@@ -37,40 +83,36 @@ const buttons = document.querySelectorAll('button')
 buttons.forEach ((button) => {
     button.addEventListener('click', () => {
         if (button.textContent == '=') {
-            displaySplit()
-            let result = operate()
-            divDisplay.textContent += button.textContent 
-            divDisplay.textContent += result
-            return
+            operate()
         }
-        let input = button.textContent
-        divDisplay.textContent += input 
-        displayNum = divDisplay.textContent
-      })
-       })
-function displaySplit() {
-       let variableSplit = displayNum.split('')
-       for(let symbol of operators) {
-            for(let variable of variableSplit) {
-        if (variable == symbol ) {
-            split = variableSplit.indexOf(variable)
-            operator = variable
-
-        }}}
-       for(let variable of variableSplit) {
-        if (variableSplit.indexOf(variable) < split) {
-           firstNum += variable
-        } else if (variableSplit.indexOf(variable) > split) {
-            secondNum += variable
+        else if (button.textContent == 'clear') {
+            window.location.reload()
         }
-       }
-       console.log(firstNum)
-       console.log(secondNum)
-       console.log(operator)
-    }   
+        else if (cycleOp(button.textContent) == true) {
+            if (symbolCheck == 2) {
+                firstNum = operate()
+                operator = button.textContent
+                secondNum = ''
+                symbolCheck = 1
+                display()
+            }
+            else {
+            operator = button.textContent
+            symbolCheck = 1
+            display()
+        }}
+        else if (cycleOp(display()) == true) {
+            symbolCheck = 2
+            secondNum += button.textContent
+            display()
+        }
+        else {
+        firstNum += button.textContent
+        display()
+}})})
 
-    const equals = document.querySelector('button#=')
-    equals.textContent = YOO 
+
+
 function add (a, b) {
     return a + b
 }
